@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/nosarthur/gom/config"
 )
 
 func Connect() {
-	conn, err := net.Dial("tcp", config.HOST+":"+config.PORT)
+	cf := GetConf()
+	conn, err := net.Dial("tcp", cf.Host+":"+cf.Port)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -21,7 +21,8 @@ func Connect() {
 
 func IsRunning() bool {
 	timeout := time.Second
-	conn, err := net.DialTimeout("tcp", config.HOST+":"+config.PORT, timeout)
+	cf := GetConf()
+	conn, err := net.DialTimeout("tcp", cf.Host+":"+cf.Port, timeout)
 	if err != nil {
 		log.Println(err)
 		println("unused port")

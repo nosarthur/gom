@@ -7,11 +7,12 @@ import (
 	"net"
 	"time"
 
-	"github.com/nosarthur/gom/config"
 )
 
 func Spinup() {
-	listener, err := net.Listen("tcp", config.HOST+":"+config.PORT)
+	cf := GetConf()
+
+	listener, err := net.Listen("tcp", cf.Host+":"+cf.Port)
 
 	if err != nil {
 		log.Fatal(err)
@@ -37,7 +38,7 @@ func Spinup() {
 func handleConn(c net.Conn) {
 	defer c.Close()
 	for {
-		bytes, err := json.Marshal(store)
+		bytes, err := json.MarshalIndent(store, "", "\t")
 		if err != nil {
 			log.Println(err)
 			return

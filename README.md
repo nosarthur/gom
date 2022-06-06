@@ -22,6 +22,11 @@ gom config
   - cmd.fail
   - port
 
+The config file is assumed to be at home dir.
+
 ## TODO
 
-- individual sessions, maybe with secret key for each session
+- [x] define .yaml file for server config
+- [ ] subprocess call to the commands
+- [ ] parse status command and populate data store
+- [ ] individual sessions, maybe with secret key for each session
