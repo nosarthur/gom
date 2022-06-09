@@ -6,16 +6,16 @@ import (
 	"log"
 	"net"
 	"time"
-
 )
 
+// Main goroutine for the server
 func Spinup() {
 	cf := GetConf()
 
-	listener, err := net.Listen("tcp", cf.Host+":"+cf.Port)
+	listener, err := net.Listen("tcp", ":"+cf.Port)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to listen: %s", err)
 	}
 
 	store = make(map[uint]jobInfo)
@@ -31,7 +31,7 @@ func Spinup() {
 			continue
 		}
 		println("client comes")
-		handleConn(conn)
+		go handleConn(conn)
 	}
 }
 

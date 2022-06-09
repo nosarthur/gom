@@ -1,6 +1,8 @@
 # gom: job monitor
 
 
+![timing](./gom.svg "Timing")
+
 
 ## design
 
