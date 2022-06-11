@@ -26,12 +26,11 @@ func GetConf() *Conf {
 		return cf
 	}
 
-	configDir, err := os.UserConfigDir()
+	home, err := os.UserHomeDir()
 	if err != nil {
 		log.Fatal(err)
 	}
-	println(configDir)
-	configPath := filepath.Join(configDir, "gom.yaml")
+	configPath := filepath.Join(home, "gom.yaml")
 
 	yamlFile, err := os.ReadFile(configPath)
 	if err != nil {
@@ -42,7 +41,5 @@ func GetConf() *Conf {
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
-	println(c.Host, c.Port, c.CmdStatus)
-
 	return &c
 }

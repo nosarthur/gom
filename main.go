@@ -19,11 +19,16 @@ type ShowCmd struct {
 type ConfigCmd struct {
 }
 
+type RunCmd struct {
+	cmds string
+}
+
 type args struct {
 	Start  *StartCmd  `arg:"subcommand:start" help:"Start/reset monitoring"`
 	Quit   *QuitCmd   `arg:"subcommand:quit" help:"Quit monitoring"`
 	Show   *ShowCmd   `arg:"subcommand:show" help:"Show jobs"`
 	Config *ConfigCmd `arg:"subcommand:config" help:"Show configurations"`
+	Run    *RunCmd    `arg:"subcommand:run" help:"Run python script"`
 }
 
 func (args) Version() string {

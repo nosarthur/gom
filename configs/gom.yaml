@@ -1,1 +1,6 @@
-/Users/dzhou/Library/Application Support/gom.yaml
+host: "localhost"
+port: "9527"
+interval: 5
+cmdstatus: "ps"
+cmdfail: ""
+

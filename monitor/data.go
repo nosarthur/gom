@@ -6,13 +6,14 @@ import (
 )
 
 // TODO: if we need to distinguish session, use map[uint][uint]jobInfo
-var store map[uint]jobInfo
+var store map[string]jobInfo
 
 type jobStatus int
 
 const (
-	SUCCESS jobStatus = iota
-	RUNNING
+	RUNNING jobStatus = iota
+	DONE
+	SUCCESS
 	FAIL
 )
 
@@ -28,8 +29,30 @@ func mustCopy(dst io.Writer, src io.Reader) {
 	}
 }
 
+func updateStore(newIDs map[string]bool) {
+
+	// Add new jobs
+	for id := range newIDs {
+		if _, ok := store[id]; !ok {
+			store[id] = jobInfo{RUNNING}
+			println(id, store[id].Status, "|", len(store))
+		}
+	}
+	// Finish old jobs
+	for id, info := range store {
+		if info.Status == RUNNING && !newIDs[id] {
+			store[id] = jobInfo{DONE}
+			println("done", id, store[id].Status, "|", len(store))
+		}
+	}
+}
+
+// Reset the store
 func Reset() {
+	// FIXME: It's not working, it needs to be done in handleConn
 	// possibly use this: https://github.com/golang/go/issues/47649
-	store = make(map[uint]jobInfo)
+	println(len(store))
+	store = make(map[string]jobInfo)
 	println("reset stats")
+	println(len(store))
 }

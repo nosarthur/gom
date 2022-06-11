@@ -1,19 +1,18 @@
 # gom: job monitor
 
 
-![timing](./gom.svg "Timing")
+![timing](./gom.png "Timing")
 
 
 ## design
 
 The CUI
 
-```
-gom start
-gom show [-v] [-t type]
-gom quit
-gom config
-```
+- `gom config`
+- `gom quit`
+- `gom run`: submit python script
+- `gom start`: start the server, or reset stats if server is already up
+- `gom show [-v] [-t type]`
 
 - Here `start` spins up the server if it's not up, or resets the stats for a
   running server
@@ -29,6 +28,7 @@ The config file is assumed to be at home dir.
 ## TODO
 
 - [x] define .yaml file for server config
-- [ ] subprocess call to the commands
+- [x] subprocess call to the commands
+- [ ] client write to the server
 - [ ] parse status command and populate data store
 - [ ] individual sessions, maybe with secret key for each session

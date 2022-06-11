@@ -5,7 +5,6 @@ import (
 	"net"
 	"os"
 	"time"
-
 )
 
 func Connect() {
@@ -25,7 +24,6 @@ func IsRunning() bool {
 	conn, err := net.DialTimeout("tcp", cf.Host+":"+cf.Port, timeout)
 	if err != nil {
 		log.Println(err)
-		println("unused port")
 		return false
 	}
 	defer conn.Close()
