@@ -27,6 +27,8 @@ The config file is assumed to be at home dir.
 
 ## TODO
 
+- [ ] report in csv format
+- [x] only record the failed jobs
 - [x] define .yaml file for server config
 - [x] subprocess call to the commands
 - [ ] client write to the server

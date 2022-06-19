@@ -41,5 +41,6 @@ func GetConf() *Conf {
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
-	return &c
+	cf = &c
+	return cf
 }

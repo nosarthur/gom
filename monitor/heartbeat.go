@@ -16,13 +16,21 @@ func heartbeat() {
 	for range ticker.C {
 		log.Println("beat===========================")
 		// no need to return error
-		out, err := exec.Command(c.CmdStatus).Output()
+		cmd := strings.Fields(c.CmdStatus)
+		out, err := exec.Command(cmd[0], cmd[1:]...).Output()
 		if err != nil {
 			log.Println(err)
 		}
 		got := parseStatus(string(out))
 		updateStore(got)
 	}
+}
+
+func parseState(s string) string {
+	//14:01 eigen3 ~ $ sacct -bn -j 14722002
+	// 14722002        RUNNING      0:0
+	fields := strings.Fields(s)
+	return fields[1]
 }
 
 func parseStatus(s string) map[string]bool {

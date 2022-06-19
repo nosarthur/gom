@@ -38,6 +38,7 @@ func Spinup() {
 func handleConn(c net.Conn) {
 	defer c.Close()
 	for {
+		// TODO: not json, use csv
 		bytes, err := json.MarshalIndent(store, "", "\t")
 		if err != nil {
 			log.Println(err)

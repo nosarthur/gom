@@ -18,6 +18,7 @@ func Connect() {
 
 }
 
+// Check if server is up (port is in use)
 func IsRunning() bool {
 	timeout := time.Second
 	cf := GetConf()
