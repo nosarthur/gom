@@ -47,7 +47,7 @@ func main() {
 			monitor.Spinup()
 		}
 	case args.Config != nil:
-		println("show config ")
+		monitor.ShowConfig()
 	case args.Quit != nil:
 		println("not implemented; just `killall gom`")
 	case args.Show != nil:

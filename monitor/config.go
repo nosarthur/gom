@@ -1,6 +1,7 @@
 package monitor
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -19,7 +20,10 @@ type Conf struct {
 // Singleton
 var cf *Conf
 
-// TODO: make it stringer
+func (c *Conf) String() string {
+	return fmt.Sprintf("Host: %s:%s\nRefresh interval: %d seconds\nCommands: %s\n\t%s",
+		c.Host, c.Port, c.Interval, c.CmdStatus, c.CmdFail)
+}
 
 func GetConf() *Conf {
 	if cf != nil {
@@ -43,4 +47,10 @@ func GetConf() *Conf {
 	}
 	cf = &c
 	return cf
+}
+
+// Show server configurations
+func ShowConfig() {
+	fmt.Println(GetConf())
+
 }
