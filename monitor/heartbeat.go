@@ -13,10 +13,9 @@ func heartbeat() {
 
 	ticker := time.NewTicker(time.Duration(c.Interval) * time.Second)
 	defer ticker.Stop()
+	cmd := strings.Fields(c.CmdStatus)
 	for range ticker.C {
-		log.Println("beat===========================")
 		// no need to return error
-		cmd := strings.Fields(c.CmdStatus)
 		out, err := exec.Command(cmd[0], cmd[1:]...).Output()
 		if err != nil {
 			log.Println(err)

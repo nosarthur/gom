@@ -53,7 +53,6 @@ func main() {
 	case args.Show != nil:
 		fallthrough
 	default:
-		println("show it")
 		monitor.Connect()
 	}
 }

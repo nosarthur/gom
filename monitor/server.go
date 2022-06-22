@@ -5,7 +5,6 @@ import (
 	"io"
 	"log"
 	"net"
-	"time"
 )
 
 // Main goroutine for the server
@@ -37,20 +36,16 @@ func Spinup() {
 
 func handleConn(c net.Conn) {
 	defer c.Close()
-	for {
-		// TODO: not json, use csv
-		bytes, err := json.MarshalIndent(store, "", "\t")
-		if err != nil {
-			log.Println(err)
-			return
-		}
-		// TODO: both read and write
-		_, err = io.WriteString(c, string(bytes))
-		if err != nil {
-			log.Println(err)
-			return
-		}
-		// TODO: no need to refresh?
-		time.Sleep(5 * time.Second)
+	// TODO: not json, use csv
+	bytes, err := json.MarshalIndent(store, "", "\t")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	// TODO: both read and write
+	_, err = io.WriteString(c, string(bytes))
+	if err != nil {
+		log.Println(err)
+		return
 	}
 }
