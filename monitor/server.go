@@ -1,8 +1,7 @@
 package monitor
 
 import (
-	"encoding/json"
-	"io"
+	"bytes"
 	"log"
 	"net"
 )
@@ -37,15 +36,20 @@ func Spinup() {
 func handleConn(c net.Conn) {
 	defer c.Close()
 	// TODO: not json, use csv
-	bytes, err := json.MarshalIndent(store, "", "\t")
+	var buf bytes.Buffer
+
+	for k, v := range store {
+
+		buf.WriteString(k)
+		buf.WriteByte(':')
+		buf.WriteString(v.Status)
+		buf.WriteByte('\n')
+	}
+	_, err := buf.WriteTo(c)
 	if err != nil {
 		log.Println(err)
 		return
 	}
 	// TODO: both read and write
-	_, err = io.WriteString(c, string(bytes))
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	// _, err = io.WriteString(c, string(bytes))
 }
